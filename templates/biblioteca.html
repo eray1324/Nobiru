@@ -1,1 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <h2>Biblioteca Digital Compartida</h2>
+    <p>Sube guías, apuntes, diapositivas o libros en PDF.</p>
+    <form method="POST">
+        <label>Título del Material</label>
+        <input type="text" name="titulo" required placeholder="Ej. Guía Completa de Álgebra">
+        
+        <label>Descripción Corta</label>
+        <input type="text" name="descripcion" required placeholder="Ej. Formulario completo para examen final">
+        
+        <label>Autor / Origen</label>
+        <input type="text" name="autor" required placeholder="Ej. Prof. Martínez">
+        
+        <button type="submit" class="btn-primary">➕ Agregar Archivo a la Biblioteca</button>
+    </form>
+</div>
 
+<h3>Materiales Disponibles</h3>
+<div class="dashboard-grid">
+    {% for archivo in archivos %}
+    <div class="card">
+        <h4>📄 {{ archivo.titulo }}</h4>
+        <p>{{ archivo.descripcion }}</p>
+        <p><small>Subido por: {{ archivo.autor }} el {{ archivo.fecha }}</small></p>
+        <a href="#" class="btn-primary" style="text-decoration:none; display:block; text-align:center; background:var(--accent-blue);">⬇️ Descargar Archivo</a>
+        <button class="btn-primary btn-favorito" data-id="{{ archivo.id }}" data-type="pdf" style="background:#ff8906;">⭐ Guardar Favorito</button>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
