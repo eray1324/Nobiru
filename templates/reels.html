@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <h2>Reels Educativos</h2>
+    <p>Graba directo con tu dispositivo o enlaza clips de estudio.</p>
+    
+    <div style="text-align:center; margin-bottom:2rem;">
+        <video id="video-preview" width="100%" style="max-width:320px; height:480px; background:#000; border-radius:12px;" controls></video>
+        <br>
+        <button id="btn-grabar" class="btn-primary" style="width:auto; background:red;">📹 Grabar Video con la Cámara</button>
+    </div>
+
+    <form method="POST">
+        <label>Título del Reel</label>
+        <input type="text" name="titulo" required placeholder="Ej. Truco rápido para factorizar">
+        
+        <label>Categoría</label>
+        <select name="categoria" style="width:100%; padding:10px; background:#0f0e17; color:white;">
+            <option value="Matemáticas">📐 Matemáticas</option>
+            <option value="Historia">⏳ Historia</option>
+            <option value="Ciencias">🧪 Ciencias</option>
+            <option value="Español">📚 Español</option>
+            <option value="Consejos">💡 Consejos para examen</option>
+        </select>
+        
+        <button type="submit" class="btn-primary">Agregar Video a la Galería</button>
+    </form>
+</div>
+
+<h3>Explorar Reels</h3>
+<div class="dashboard-grid">
+    {% for video in videos %}
+    <div class="card" style="text-align:center;">
+        <h5>⚡ {{ video.titulo }}</h5>
+        <span style="background:var(--accent-purple); padding:3px 10px; border-radius:10px; font-size:0.8rem;">{{ video.categoria }}</span>
+        <div style="background:#000; height:200px; margin:15px 0; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#555;">
+            ▶️ [Video Player Simulado]
+        </div>
+        <button class="btn-primary btn-favorito" data-id="{{ video.id }}" data-type="video" style="background:#ff8906;">⭐ Guardar en Favoritos</button>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
