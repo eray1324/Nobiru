@@ -10,14 +10,14 @@
     <nav class="navbar">
         <div class="logo">NOBIRU</div>
         {% if session.get('user_id') %}
-        <div class="nav-links">
-            <a href="{{ url_for('index') }}">Inicio</a>
-            <a href="{{ url_for('quiz') }}">Cuestionarios</a>
-            <a href="#">Comunidad</a>
-            <a href="#">Biblioteca</a>
-            <a href="#">Reels</a>
-            <a href="{{ url_for('logout') }}" class="btn-logout">Cerrar Sesión</a>
-        </div>
+      <div class="nav-links">
+    <a href="{{ url_for('index') }}">Inicio</a>
+    <a href="{{ url_for('quiz') }}">Cuestionarios</a>
+    <a href="{{ url_for('comunidad') }}">Comunidad</a>
+    <a href="{{ url_for('biblioteca') }}">Biblioteca</a>
+    <a href="{{ url_for('reels') }}">Reels</a>
+    <a href="{{ url_for('logout') }}" class="btn-logout">Cerrar Sesión</a>
+</div>
         {% endif %}
     </nav>
     
