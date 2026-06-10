@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card login-card">
+    <h2>Ingresar a Nobiru</h2>
+    <p>Si es tu primera vez, tu cuenta se creará automáticamente.</p>
+    <form method="POST">
+        <label>Nombre de Usuario</label>
+        <input type="text" name="username" required placeholder="Ej. estudianteEstrella">
+        
+        <label>Correo Electrónico</label>
+        <input type="email" name="email" required placeholder="correo@estudiante.com">
+        
+        <button type="submit" class="btn-primary">Registrarse / Iniciar Sesión</button>
+    </form>
+</div>
+{% endblock %}
