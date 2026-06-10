@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card" style="text-align:center;">
+    <h2>📊 ¡Cuestionario Terminado!</h2>
+    <p style="font-size:1.5rem; color:var(--accent-yellow);">¡Excelente esfuerzo!</p>
+    
+    <div style="margin:2rem 0;">
+        <p style="font-size:1.2rem;">Aciertos: <span style="color:#2ecc71; font-weight:bold;">{{ aciertos }}</span></p>
+        <p style="font-size:1.2rem;">Errores: <span style="color:#e74c3c; font-weight:bold;">{{ errores }}</span></p>
+        <p style="font-size:1.8rem; font-weight:bold; color:var(--accent-orange);">Puntuación: +{{ puntos }} XP</p>
+    </div>
+
+    <div class="card" style="background:#1e1e24; display:inline-block; padding:1rem 2rem;">
+        <p>Tu rango actual ahora es:</p>
+        <span class="badge-visual {{ insignia.lower() }}" style="margin:0 auto;">{{ insignia }}</span>
+    </div>
+    
+    <a href="{{ url_for('index') }}" class="btn-primary" style="text-decoration:none; display:block;">Volver al Inicio</a>
+</div>
+{% endblock %}
