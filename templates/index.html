@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>PrepUniv - Comunidad Estudiantil</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --morado: #6a1b9a;
+            --naranja: #ff9800;
+            --amarillo: #ffeb3b;
+            --azul: #2196f3;
+            --oscuro: #121212;
+            --gris: #1e1e1e;
+            --texto: #ffffff;
+        }
+        body {
+            background-color: var(--oscuro);
+            color: var(--texto);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: var(--gris);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-around;
+            border-bottom: 2px solid var(--morado);
+        }
+        .container { padding: 20px; max-width: 800px; margin: auto; }
+        .card {
+            background: var(--gris);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--naranja);
+        }
+        button {
+            background-color: var(--morado);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover { background-color: var(--azul); }
+        .insignia { color: var(--amarillo); font-size: 1.2rem; }
+        .reel-video { width: 100%; border-radius: 10px; background: #000; height: 400px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div onclick="showSection('inicio')"><i class="fas fa-home"></i></div>
+        <div onclick="showSection('quiz')"><i class="fas fa-brain"></i></div>
+        <div onclick="showSection('reels')"><i class="fas fa-play-circle"></i></div>
+        <div onclick="showSection('biblioteca')"><i class="fas fa-book"></i></div>
+        <div onclick="showSection('perfil')"><i class="fas fa-user"></i></div>
+    </nav>
+
+    <div class="container">
+        <section id="inicio">
+            <h1>Bienvenido a la Comunidad</h1>
+            <div class="card">
+                <h3>Pregunta de la comunidad</h3>
+                <p>¿Alguien tiene consejos para el área de matemáticas?</p>
+                <button>Responder</button>
+            </div>
+        </section>
+
+        <section id="quiz" style="display:none;">
+            <h2>Quiz de Admisión</h2>
+            <div id="quiz-container" class="card">
+                <p id="pregunta-texto">Cargando pregunta...</p>
+                <div id="opciones"></div>
+            </div>
+            <p id="score-display"></p>
+        </section>
+
+        <section id="reels" style="display:none;">
+            <h2>Reels Educativos</h2>
+            <div class="card">
+                <video class="reel-video" controls>
+                    <source src="" type="video/mp4">
+                </video>
+                <h4>Consejo de Ciencias</h4>
+                <button onclick="saveFavorite('reel', 1)"><i class="far fa-heart"></i> Favorito</button>
+            </div>
+        </section>
+
+        <section id="perfil" style="display:none;">
+            <h2>Mi Perfil</h2>
+            <div class="card">
+                <p>Usuario: <strong id="user-name">Estudiante123</strong></p>
+                <p>Nivel: <span class="insignia" id="user-level">Oro</span></p>
+                <div id="favoritos">
+                    <h3>Mis Favoritos</h3>
+                    <ul id="lista-favs"></ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function showSection(id) {
+            document.querySelectorAll('section').forEach(s => s.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+            if(id === 'quiz') startQuiz();
+        }
+
+        let currentQuestion = 0;
+        let score = 0;
+        let questions = [];
+
+        async function startQuiz() {
+            const res = await fetch('/api/quiz-data');
+            questions = await res.json();
+            showQuestion();
+        }
+
+        function showQuestion() {
+            if(currentQuestion < questions.length) {
+                const q = questions[currentQuestion];
+                document.getElementById('pregunta-texto').innerText = q.q;
+                const optDiv = document.getElementById('opciones');
+                optDiv.innerHTML = '';
+                q.options.forEach(opt => {
+                    const btn = document.createElement('button');
+                    btn.innerText = opt;
+                    btn.style.margin = "5px";
+                    btn.onclick = () => checkAnswer(opt, q.a);
+                    optDiv.appendChild(btn);
+                });
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function checkAnswer(selected, correct) {
+            if(selected === correct) score++;
+            currentQuestion++;
+            showQuestion();
+        }
+
+        function finishQuiz() {
+            document.getElementById('quiz-container').innerHTML = `
+                <h3>¡Cuestionario Terminado!</h3>
+                <p>Puntuación: ${score} / ${questions.length}</p>
+                <p>Has obtenido ${score} aciertos.</p>
+                <p style="color:var(--amarillo)">¡Felicidades por completar el repaso!</p>
+            `;
+        }
+
+        function saveFavorite(type, id) {
+            const list = document.getElementById('lista-favs');
+            const li = document.createElement('li');
+            li.innerText = `${type} #${id} guardado`;
+            list.appendChild(li);
+            alert('¡Guardado en favoritos!');
+        }
+    </script>
+</body>
+</html>
