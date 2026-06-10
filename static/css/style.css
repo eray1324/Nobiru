@@ -1,0 +1,137 @@
+:root {
+    --bg-dark: #0f0e17;
+    --card-bg: #16161a;
+    --text-main: #fffffe;
+    --text-support: #a7a9be;
+    --accent-purple: #7f5af0;
+    --accent-yellow: #eebbc3;
+    --accent-orange: #ff8906;
+    --accent-blue: #3da9fc;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: var(--card-bg);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--accent-purple);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--accent-orange);
+    letter-spacing: 2px;
+}
+
+.nav-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    margin-left: 1.5rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--accent-blue);
+}
+
+.container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+    border: 1px solid #242629;
+}
+
+.quote-card {
+    border-left: 5px solid var(--accent-orange);
+    background: linear-gradient(90deg, #242629, var(--card-bg));
+}
+
+.quote {
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--accent-yellow);
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Sistema Visual de Insignias */
+.badge-visual {
+    width: fit-content;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(255,255,255,0.1);
+}
+
+.bronce { background-color: #cd7f32; color: #fff; border: 2px solid #8c521f; }
+.plata { background-color: #c0c0c0; color: #000; border: 2px solid #fff; }
+.oro { background-color: #ffd700; color: #000; border: 2px solid #ff8906; font-size: 1.1rem; }
+.platino { background-color: #e5e4e2; color: #333; box-shadow: 0 0 15px #3da9fc; }
+.diamante { background-color: #b9f2ff; color: #000; box-shadow: 0 0 20px #3da9fc; }
+
+/* Botones Grandes y Visibles */
+.btn-primary {
+    background-color: var(--accent-purple);
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.btn-primary:hover {
+    background-color: #6b46c1;
+    transform: translateY(-2px);
+}
+
+input[type="text"], input[type="email"] {
+    width: 100%;
+    padding: 0.8rem;
+    margin: 0.5rem 0 1.5rem 0;
+    background-color: var(--bg-dark);
+    border: 1px solid var(--text-support);
+    color: white;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.pregunta-block {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: #1e1e24;
+    border-radius: 8px;
+}
